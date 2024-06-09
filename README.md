@@ -214,3 +214,144 @@ Epoch: 40  |  Train Loss: 0.1841 | Val Loss: 0.1050  |  Train Accuracy: 0.9603  
 - PyTorch Documentation
 - Streamlit Documentation
 - Torchvision Transforms
+
+
+# 3. **Quora Duplicate Question Detection**
+This project focuses on detecting duplicate questions in the Quora dataset using an LSTM model. The pipeline includes preprocessing, model training, evaluation, and visualization.
+
+### **Project Structure**
+
+```arduino
+Quora_Is_Duplicate_Detection/
+│
+├── datasets/
+│   ├── quora_questions.csv
+│   ├── train_ds.csv
+│   └── test_ds.csv
+│
+├── plots/
+│   ├── loss_plot.png
+│   ├── accuracy_plot.png
+│   ├── roc_train.png
+│   ├── cm_train.png
+│   ├── roc_test.png
+│   ├── cm_test.png
+│   └── cm_with_threshold{threshold}.png
+│
+├── config.py
+├── data.py
+├── evaluate.py
+├── model.py
+├── train.py
+└── utils.py
+```
+
+### **Installation**
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/Quora_Is_Duplicate_Detection.git
+cd Quora_Is_Duplicate_Detection
+```
+
+2. Install required packages:
+```bash
+pip install -r requirements.txt
+```
+
+### **Configuration**
+The configuration settings for the model are specified in the `config.py` file. Modify the `ModelConfig` class to set parameters such as learning rate, batch size, number of epochs, etc.
+
+### **Data Preparation**
+Place the `quora_questions.csv` dataset in the `datasets` directory. The script will split this dataset into training and testing datasets.
+
+### **Training**
+To train the model, run the train.py script:
+
+This script will:
+
+- Load and preprocess the data.
+- Train the LSTM model.
+- Save the trained model and training history.
+- Plot training and validation loss and accuracy.
+
+### **Evaluation**
+To evaluate the model, run the `evaluate.py` script:
+```bash
+python evaluate.py
+```
+This script will:
+
+- Load the trained model.
+- Evaluate the model on the training and testing datasets.
+- Print the classification report.
+- Plot ROC curves and confusion matrices.
+
+### **Utils**
+The utils.py script contains utility functions for:
+
+- Tokenizer creation and loading.
+- Weighted binary cross-entropy loss calculation.
+- Plotting training history, ROC curves, and confusion matrices.
+- Model prediction pipeline.
+
+### *Example Usage
+Predicting Specific Questions
+Use the **PipeLine** class to predict if pairs of questions are duplicates:
+
+```python
+from utils import PipeLine
+from config import ModelConfig
+
+config = ModelConfig()
+model_path = "Quora_Is_Duplicate_Detection/quoraduplidetec4m.pth"
+
+pipeline = PipeLine(config, model_path=model_path)
+
+questions1 = ["What is the best way to learn Python?", "How do I start learning Python?"]
+questions2 = ["How to learn Python programming?", "What is the best way to learn programming?"]
+
+results = pipeline.predict(questions1, questions2, threshold=0.7)
+print(results)
+```
+
+### **Getting Accuracy and F1 Score with Specific Threshold**
+```python
+from utils import get_accuracy_with_threshold
+from config import ModelConfig
+
+config = ModelConfig()
+ds = pd.read_csv("Quora_Is_Duplicate_Detection/datasets/test_ds.csv")
+model_path = "Quora_Is_Duplicate_Detection/quoraduplidetec4m.pth"
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+threshold = 0.7
+
+accuracy, f1score, confusion_matrix = get_accuracy_with_threshold(config, ds, model_path, device, threshold=threshold, sample_size=5000)
+```
+
+### **Using the Pipeline Class for Predictions**
+The PipeLine class in `utils.py` provides a convenient way to preprocess input questions, make predictions using the trained model, and display the results.
+
+**Example usage**
+```python 
+from config import ModelConfig
+from utils import PipeLine
+
+config = ModelConfig()
+model_path = "path_to_trained_model.pth"
+pipeline = PipeLine(config, model_path=model_path)
+
+questions1 = ["What is the capital of France?", "How to learn Python?"]
+questions2 = ["Which city is the capital of France?", "How can I start learning Python?"]
+
+results = pipeline.predict(questions1, questions2, threshold=0.5, verbose=True)
+```
+
+### **License**
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+### Acknowledgements
+- Quora for providing the dataset.
+- Hugging Face Tokenizers for the tokenizer library.
+- PyTorch for the deep learning framework.
+
+##### **Feel free to contribute to this project by creating issues or pull requests. Happy coding!**
