@@ -1,4 +1,4 @@
-## **Credit Card Fraud Detection**
+1. # **Credit Card Fraud Detection**
 
 This repository contains code and resources for a credit card fraud detection model. The model uses a neural network to identify fraudulent transactions from a dataset of credit card transactions
 
@@ -75,3 +75,140 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ### **License**
 This project is licensed under the MIT License.
+
+
+2. # **Medicinal Plant Classification**:
+
+  This project involves building a Convolutional Neural Network (CNN) to 
+classify medicinal plants using images. The model is implemented using PyTorch and includes data preprocessing, model training, and evaluation components. Additionally, a Streamlit application is provided for deploying the model.
+
+### **Table of Contents**
+
+- Installation
+- Dataset
+- Configuration
+- Training the Model
+- Evaluating the Model
+- Deploying the Model
+- Model Key Points
+- Usage
+- Results
+- References
+
+### **Installation**
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/medicinal-plant-classification.git
+cd medicinal-plant-classification
+```
+
+2. Install the required packages:
+```bash
+pip install -r requirements.txt
+```
+
+### **Dataset**
+The dataset used in this project is a collection of medicinal plant images. The images should be organized in the following structure:
+
+```markdown
+Medicinal plant dataset/
+    class1/
+        img1.jpg
+        img2.jpg
+        ...
+    class2/
+        img1.jpg
+        img2.jpg
+        ...
+    ...
+```
+
+### **Configuration**
+The model configuration is specified in `config.py` using a dataclass `ModelConfig`. This includes hyperparameters like image size, kernel size, number of channels, and learning rate.
+
+```python 
+from dataclasses import dataclass
+from data import idx_to_class
+
+@dataclass
+class ModelConfig():
+    img_size: int = 224
+    kernel_size: int = 3
+    in_channels: int = 3
+    out_channels: int = 8
+    pool_kernel_size: int = 2
+    pool_stride: int = 2
+    num_classes: int = len(idx_to_class)
+    hidden_dim: int = 128
+    stride: int = 1
+    padding: int = 1
+    dropout: float = 0.25
+    batch_size: int = 64
+    lr: float = 1e-3
+```
+
+### Training the Model
+To train the model, run `train.py`. This script initializes the model, dataloaders, and the training loop.
+
+```bash
+python train.py
+```
+
+**Example Output:**
+```yaml
+using cuda
+Epoch: 1  |  Train Loss: 3.1795 | Val Loss: 2.6618  |  Train Accuracy: 0.1791  |  Val Accuracy: 0.3078
+...
+```
+
+### **Evaluating the Model**
+To evaluate the model and visualize predictions, run `evaluate.py`. This script loads the saved model and displays a batch of predictions.
+
+```bash
+python evaluate.py
+```
+
+### **Deploying the Model**
+A Streamlit application is provided for deploying the model. To run the app, use the following command:
+
+```bash
+streamlit run deploy.py
+```
+Upload an image through the web interface, and the model will predict the class of the medicinal plant in the image.
+
+### **Model Key Points**
+
+- Architecture: The model is a CNN consisting of two convolutional layers, each followed by batch normalization, ReLU activation, and max pooling. This is followed by a fully connected network.
+- Input Size: The input images are resized to 224x224 pixels.
+- Output: The final layer is a softmax layer that outputs the probability distribution over the classes.
+- Optimization: The model is optimized using the Adam optimizer with a learning rate scheduler.
+- Loss Function: Negative Log-Likelihood Loss (NLLLoss) is used for training.
+- Metrics: Accuracy is measured using TorchMetrics.
+
+### **Usage**
+- Load and Use the Model in Your Code:
+
+```python 
+import torch
+from config import ModelConfig
+from model import CNN_Model
+
+# Initialize the configuration and model
+config = ModelConfig()
+model = CNN_Model(config)
+
+# Load the trained model weights
+model.load_model(filepath="models/medplantdetec_6m.pth", config=config)
+```
+
+### **Results**
+The model was trained for 24 epochs with the following results:
+```yaml
+Epoch: 40  |  Train Loss: 0.1841 | Val Loss: 0.1050  |  Train Accuracy: 0.9603  |  Val Accuracy: 0.9821
+```
+
+### **References**
+- PyTorch Documentation
+- Streamlit Documentation
+- Torchvision Transforms
