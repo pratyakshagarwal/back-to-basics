@@ -1,0 +1,10 @@
+torch
+numpy
+pandas
+torchinfo
+matplotlib
+seaborn
+typing
+scikit-learn
+imbalanced-learn
+torchmetrics
