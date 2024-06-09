@@ -1,4 +1,6 @@
-1. # **Credit Card Fraud Detection**
+
+
+# 1. **Credit Card Fraud Detection**
 
 This repository contains code and resources for a credit card fraud detection model. The model uses a neural network to identify fraudulent transactions from a dataset of credit card transactions
 
@@ -77,7 +79,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 This project is licensed under the MIT License.
 
 
-2. # **Medicinal Plant Classification**:
+# 2. **Medicinal Plant Classification**:
 
   This project involves building a Convolutional Neural Network (CNN) to 
 classify medicinal plants using images. The model is implemented using PyTorch and includes data preprocessing, model training, and evaluation components. Additionally, a Streamlit application is provided for deploying the model.
