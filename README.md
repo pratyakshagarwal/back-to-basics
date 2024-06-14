@@ -355,3 +355,84 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 - PyTorch for the deep learning framework.
 
 ##### **Feel free to contribute to this project by creating issues or pull requests. Happy coding!**
+
+
+
+# **4. Vision Transformers for Bird Species Classification**
+>  **Table of Contents**
+- Introduction
+- Dataset
+- Model Architecture
+- Repo Overview
+- Training
+- Setup
+- TensorBoard Visualization
+- Results
+- References
+
+### **Introduction**
+>  This project focuses on classifying bird species using **Vision Transformers** (ViTs). It leverages a dataset of **100 bird species** available on Kaggle and demonstrates the entire pipeline from training to deployment.
+
+### **Dataset**
+>  The dataset used in this project is the "100 Bird Species" dataset from Kaggle. It includes images of 100 different bird species with labeled training and test data.
+
+`Dataset Link` - [100-bird-species](https://www.kaggle.com/datasets/gpiosenka/100-bird-species)
+
+### **Model Architecture**
+>   The model is built using Vision Transformers (ViT), which is a state-of-the-art architecture for image classification tasks.
+
+- **Patch Embedding**: Converts input images into patch embeddings using a convolutional layer.
+- **Class Token**: Adds a learnable class token to the sequence of patch embeddings.
+- **Positional Embeddings**: Adds learnable positional embeddings to the patch embeddings.
+- **Transformer Encoder**: Processes the patch embeddings using multiple Transformer encoder layers.
+- **MLP Head**: The output of the [CLS] token is passed through an MLP for classification.
+
+### **Repo Overview**
+> The project structure is organized as follows:
+
+- **data**/: Directory containing dataset loading scripts (`train_dataset.py`, `val_dataset.py`, `test_dataset.py`) and utilities for data preprocessing.
+- models/: Contains the ViT model architecture (`vit.py`).
+- utils.py: Utility functions for plotting training history (`plot_history`), cosine learning rate scheduling (`CosineLrScheduler`), and visualization of model predictions (`visualize_predictions`).
+- vit_trainer.py: Defines`VIT_Trainer` class responsible for model training (`run` method) and validation loops (`validation_loop` method).
+- config.py: Configuration file (`VITConfig` dataclass) containing model hyperparameters, training configurations, and paths for logging and checkpoints.
+- train.py: Script to initiate and run the training process. It imports datasets, initializes the trainer, compiles the model, and executes training for a specified number of epochs.
+- evaluate.py: Script to load a trained model and visualize its predictions on training, validation, and test datasets.
+
+### **Training**
+>  The training of the Vision Transformer (ViT) model was conducted with a focus on efficient learning and robust evaluation. Below is an overview of the training setup and results:
+
+##### **Training Configuration**
+-  Model Architecture: Vision Transformer (ViT)
+-  Dataset: 100 bird species dataset from Kaggle
+-  Device: CUDA (if available) or CPU
+-  Optimizer: AdamW
+-  Learning Rate Scheduler: Custom Cosine Learning Rate Scheduler with Warmup
+-  Batch Size: 64
+-  Number of Epochs: 25
+
+### **Setup**
+>  Clone the repository:
+```bash
+git clone https://github.com/pratyakshagarwal/back-to-basics
+cd Bird_Species_Classification_Using_VIT
+```
+
+>  Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+### **TensorBoard Visualization**
+-  To visualize training progress and metrics using TensorBoard, run:
+```bash
+tensorboard --logdir=runs
+```
+- Open your browser and go to `localhost:6006` to view the TensorBoard dashboard.
+
+### **Results**
+- The ViT model achieves competitive accuracy on the validation dataset, reaching an accuracy of 86.12% after 22 epochs of training.
+
+### **References**
+- [PyTorch Documentation](https://pytorch.org/docs/stable/index.html): Official documentation for PyTorch framework.
+- [Vision Transformer Paper](https://arxiv.org/abs/2010.11929) : Original research paper introducing Vision Transformers.
+
