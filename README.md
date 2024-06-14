@@ -391,12 +391,12 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 > The project structure is organized as follows:
 
 - **data**/: Directory containing dataset loading scripts (`train_dataset.py`, `val_dataset.py`, `test_dataset.py`) and utilities for data preprocessing.
-- models/: Contains the ViT model architecture (`vit.py`).
-- utils.py: Utility functions for plotting training history (`plot_history`), cosine learning rate scheduling (`CosineLrScheduler`), and visualization of model predictions (`visualize_predictions`).
-- vit_trainer.py: Defines`VIT_Trainer` class responsible for model training (`run` method) and validation loops (`validation_loop` method).
-- config.py: Configuration file (`VITConfig` dataclass) containing model hyperparameters, training configurations, and paths for logging and checkpoints.
-- train.py: Script to initiate and run the training process. It imports datasets, initializes the trainer, compiles the model, and executes training for a specified number of epochs.
-- evaluate.py: Script to load a trained model and visualize its predictions on training, validation, and test datasets.
+- **models**/: Contains the ViT model architecture (`vit.py`).
+- **utils.py**: Utility functions for plotting training history (`plot_history`), cosine learning rate scheduling (`CosineLrScheduler`), and visualization of model predictions (`visualize_predictions`).
+- **vit_trainer.py**: Defines`VIT_Trainer` class responsible for model training (`run` method) and validation loops (`validation_loop` method).
+- **config.py**: Configuration file (`VITConfig` dataclass) containing model hyperparameters, training configurations, and paths for logging and checkpoints.
+- **train.py**: Script to initiate and run the training process. It imports datasets, initializes the trainer, compiles the model, and executes training for a specified number of epochs.
+- **evaluate.py**: Script to load a trained model and visualize its predictions on training, validation, and test datasets.
 
 ### **Training**
 >  The training of the Vision Transformer (ViT) model was conducted with a focus on efficient learning and robust evaluation. Below is an overview of the training setup and results:
